@@ -1,0 +1,5 @@
+- definierter Interval -> Interval rechnen & vergleich mit Bin-interval in % (Additiv & Subtraktiv)
+- Trapetzberechnung
+- (Fassregel)
+- Y-Achse / X-Achse beschriften
+- write params to URL & get params from url
