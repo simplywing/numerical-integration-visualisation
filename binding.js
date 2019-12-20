@@ -22,6 +22,19 @@ function init() {
       // Set property update logic
       setPropUpdateLogic(propName);
     }
+    if (el.type === 'checkbox') {
+      // Get property name from each input with an attribute of 'os-model'
+      let propName = el.getAttribute('os-model');
+      console.log("Propname", propName);
+
+      // Update bound scope property on input change
+      el.addEventListener('input', e => {
+        scope[propName] = el.checked;
+      });
+
+      // Set property update logic
+      setPropUpdateLogic(propName);
+    }
   }
 };
 
@@ -36,7 +49,10 @@ function setPropUpdateLogic(prop) {
         // Set input elements to new value
         for (let el of inputElements) {
           if (el.getAttribute('os-model') === prop) {
-            if (el.type) {
+            if (el.type === 'checkbox') {
+              el.checked = newValue;
+            }
+            else if(el.type) {
               el.value = newValue;
             }
           }

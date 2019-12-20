@@ -1,4 +1,7 @@
 - definierter Interval -> Interval rechnen & vergleich mit Bin-interval in % (Additiv & Subtraktiv)
+
+
+
 - Trapetzberechnung
 - (Fassregel)
 - Y-Achse / X-Achse beschriften
