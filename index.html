@@ -21,9 +21,13 @@
             <label for="bin">yScaling:</label>
             <input type="range" id="yscaling" name="yscaling" min="1" max="100" os-model="yscaling">
             <input type="number" id="yscaling-value" os-model="yscaling">
+
+            <label for="bin">Zoom:</label>
+            <input type="range" id="zoom" name="zoom" min="10" max="500" os-model="zoom">
+            <input type="number" id="zoom-value" os-model="zoom">
         </div>
         <div class="inputGroup">
-            <input type="checkbox" id="intervalCheckbox" os-model="intervalCheckbox">
+            <input type="checkbox" id="intervalCheckbox" os-model="intervalCheckbox" checked>
             <label for="interval1">Interval:</label>
             <input type="range" id="interval1" name="interval1" min="0" max="40" os-model="interval1">
             <input type="number" id="interval1-value" os-model="interval1">
