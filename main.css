@@ -42,3 +42,16 @@ label{
 .inputGroup{
     color: white;
 }
+
+.dashboard{
+    display: block;
+    height: auto;
+    width: 230px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color:rgba(119, 136, 153, 0.75);
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+}

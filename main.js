@@ -6,15 +6,22 @@ let ctx = mainCanvas.getContext("2d");
 let ch = mainCanvas.height;
 let cw = mainCanvas.width;
 
-let unit = 80
-
 scope.bin = 40;
 scope.xscaling = 50;
 scope.yscaling = 50;
 scope.interval1 = 3.141;
 scope.interval2 = 11;
-scope.zoom = 80;
+scope.zoom = 60;
 scope.intervalCheckbox = true;
+
+/*Output fields*/
+let calcArea = document.getElementById("calcArea");
+let intArea = document.getElementById("intArea");
+let diffPercent = document.getElementById("diffPercent");
+
+let CalcBinArea = 0;
+let intAreaVal = 0;
+let diffPercentageVal = 0;
 
 function getFunctionResult(num, type, typeArgs){
     if(type === 3){
@@ -102,6 +109,10 @@ function draw(){
     let binRange = (scope.interval2 - scope.interval1) * scope.zoom;
     let binSize = binRange / bin;
     let binStart = scope.interval1 * scope.zoom;
+    CalcBinArea = 0;
+    intAreaVal = 0;
+    diffPercentageVal = 0;
+    
     for(let i = binSize/2 + binStart; i < binRange + binStart; i += binSize){
         let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
         let h = getFunctionResult(i, 3, args);
@@ -110,13 +121,28 @@ function draw(){
             //pillar fill
             ctx.fillStyle = "rgba(255,0,0,0.5)";
             ctx.fillRect(i-binSize/2, 0, binSize, h);
+            CalcBinArea += ((binSize / scope.zoom) * (-h / scope.zoom)) ;
 
             //lines, left & right
             line(i-binSize/2, 0, i-binSize/2, h, 2, "rgb(255,0,0)", ctx);
             line(i+binSize/2, 0, i+binSize/2, h, 2, "rgb(255,0,0)", ctx);
         }
     }
+    //calculate pseudo acurate Integral (pixel by pixel)
+    for(let i = binStart; i < binRange + binStart; i += 1){
+        let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
+        let h = getFunctionResult(i, 3, args);
 
+        if(scope.intervalCheckbox){
+            intAreaVal += ((1 / scope.zoom) * (-h / scope.zoom)) ;
+        }
+    }
+
+    calcArea.innerText = Math.round(CalcBinArea * 1000) /1000;
+    intArea.innerText = Math.round(intAreaVal * 1000) /1000;
+    diffPercentageVal = (100 / intAreaVal * CalcBinArea) - 100;
+    diffPercent.innerText = Math.round(diffPercentageVal * 1000) /1000;
+    
 
     //Interval
     if(scope.intervalCheckbox){
