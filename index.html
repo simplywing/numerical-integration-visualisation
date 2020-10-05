@@ -11,22 +11,21 @@
     <div class="controlPanel">
         <div class="inputGroup">
             <label for="bin">Bin:</label>
-            <input type="range" id="bin" name="bin" min="1" max="500" os-model="bin">
+            <input type="range" id="bin" name="bin" min="1" max="50" os-model="bin">
             <input type="number" id="bin-value" os-model="bin">
 
-            <label for="bin">xScaling:</label>
+            <!-- <label for="bin">xScaling:</label>
             <input type="range" id="xscaling" name="xscaling" min="1" max="400" os-model="xscaling">
             <input type="number" id="xscaling-value" os-model="xscaling">
 
             <label for="bin">yScaling:</label>
             <input type="range" id="yscaling" name="yscaling" min="1" max="100" os-model="yscaling">
             <input type="number" id="yscaling-value" os-model="yscaling">
-
+ -->
             <label for="bin">Zoom:</label>
             <input type="range" id="zoom" name="zoom" min="10" max="500" os-model="zoom">
             <input type="number" id="zoom-value" os-model="zoom">
-        </div>
-        <div class="inputGroup">
+
             <input type="checkbox" id="intervalCheckbox" os-model="intervalCheckbox" checked>
             <label for="interval1">Interval:</label>
             <input type="range" id="interval1" name="interval1" min="0" max="40" os-model="interval1">
@@ -34,7 +33,36 @@
 
             <input type="range" id="interval2" name="interval2" min="0" max="40" os-model="interval2">
             <input type="number" id="interval2-value" os-model="interval2">
+
         </div>
+        <div class="inputGroup">
+            <label for="valueA">A</label>
+            <input type="range" id="valueA" name="valueA" min="-5" max="5" os-model="valueA">
+            <input type="number" id="valueA-value" os-model="valueA">
+
+            <label for="valueB">B</label>
+            <input type="range" id="valueB" name="valueB" min="-5" max="5" os-model="valueB">
+            <input type="number" id="valueB-value" os-model="valueB">
+
+            <label for="valueC">C</label>
+            <input type="range" id="valueC" name="valueC" min="-5" max="5" os-model="valueC">
+            <input type="number" id="valueC-value" os-model="valueC">
+
+            <label for="valueD">D</label>
+            <input type="range" id="valueD" name="valueD" min="-5" max="5" os-model="valueD">
+            <input type="number" id="valueD-value" os-model="valueD">            
+        </div>
+        <div class="inputGroup">
+            <label for="valueD">Grundfunktion:</label>            
+            <select name="Grundfunktion" id="grundfunktion">
+                <option value="1">linear</option>
+                <option value="2">quadratisch</option>
+                <option value="3">trigonometrisch</option>
+                <option value="4">exponentiell</option>
+            </select>
+
+        </div>
+
         <!--<div class="inputGroup">
                 <label for="range">numArms:</label>
                 <input type="range" id="numArms" name="range" min="1" max="100" os-model="numArms">

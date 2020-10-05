@@ -6,11 +6,19 @@ let ctx = mainCanvas.getContext("2d");
 let ch = mainCanvas.height;
 let cw = mainCanvas.width;
 
+let grundfunktion = 3;
+
 scope.bin = 40;
 scope.xscaling = 50;
 scope.yscaling = 50;
 scope.interval1 = 3.141;
 scope.interval2 = 11;
+
+scope.valueA = -3;
+scope.valueB = 4;
+scope.valueC = -2;
+scope.valueD = -2;
+
 scope.zoom = 60;
 scope.intervalCheckbox = true;
 
@@ -23,9 +31,34 @@ let CalcBinArea = 0;
 let intAreaVal = 0;
 let diffPercentageVal = 0;
 
-function getFunctionResult(num, type, typeArgs){
-    if(type === 3){
+function getFunctionResult(num, typeArgs){
+    let A = parseInt(scope.valueA);
+    let B = parseInt(scope.valueB);
+    let C = parseInt(scope.valueC);
+    let D = parseInt(scope.valueD);
+
+    let type = parseInt(document.getElementById("grundfunktion").value);
+
+    if(type === 7){
         return -Math.sin(num/scope.zoom * (1/typeArgs.xScaling)) * typeArgs.yScaling * scope.zoom * 0.01
+    }
+    else if(type === 1){
+        //Linear
+        return A * num + D;
+    }
+    else if(type === 2){
+        //Quadratisch
+        //return A * Math.pow(num - B, 2) + D
+        return A * Math.pow(num * (0.05) - B, 2) + D;
+    }
+    else if(type === 3){
+        //Trigonometrisch
+        //return C * Math.sin(A * (num - B)) + D
+        return C * 60 * Math.sin(A * 0.01 * (num - B * 50)) + D * 50;
+    }
+    else if(type === 4){
+        //Exponentiell
+        return C * Math.pow(Math.E, A * 0.01 * (num - B * 50)) + D * 70;
     }
 }
 
@@ -64,7 +97,7 @@ function draw(){
     //function
     for(let i = 0; i < cw; i++){
         let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
-        let h = getFunctionResult(i, 3, args);
+        let h = getFunctionResult(i, args);
         line(i, 0, i, h, 1, "white", ctx);
     }
 
@@ -77,7 +110,7 @@ function draw(){
     //pillars
     // for(let i = -bin/2; i < cw; i +=bin){
     //     let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
-    //     let h = getFunctionResult(i, 3, args);
+    //     let h = getFunctionResult(i, args);
 
     //     //pillar fill
     //     ctx.fillStyle = "rgba(255,0,0,0.5)";
@@ -93,7 +126,7 @@ function draw(){
     // let binSize = cw / bin;
     // for(let i = -binSize/2; i < cw; i += binSize){
     //     let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
-    //     let h = getFunctionResult(i, 3, args);
+    //     let h = getFunctionResult(i, args);
 
     //     //pillar fill
     //     ctx.fillStyle = "rgba(255,0,0,0.5)";
@@ -115,7 +148,7 @@ function draw(){
     
     for(let i = binSize/2 + binStart; i < binRange + binStart; i += binSize){
         let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
-        let h = getFunctionResult(i, 3, args);
+        let h = getFunctionResult(i, args);
 
         if(scope.intervalCheckbox){
             //pillar fill
@@ -131,7 +164,7 @@ function draw(){
     //calculate pseudo acurate Integral (pixel by pixel)
     for(let i = binStart; i < binRange + binStart; i += 1){
         let args = {yScaling: (scope.yscaling/50) * 300, xScaling: scope.xscaling/50};
-        let h = getFunctionResult(i, 3, args);
+        let h = getFunctionResult(i, args);
 
         if(scope.intervalCheckbox){
             intAreaVal += ((1 / scope.zoom) * (-h / scope.zoom)) ;
